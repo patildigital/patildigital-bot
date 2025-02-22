@@ -1,0 +1,28 @@
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+
+TOKEN = 7505431251:AAHBQV-0CKvoeiGcJBebuKBUSmO8olPWyac
+
+def start(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text("Welcome to Patil Digital Bot! Type /menu to see options.")
+
+def menu(update: Update, context: CallbackContext) -> None:
+    menu_text = "📚 *Available Courses:*\n1️⃣ Digital Marketing\n2️⃣ Hacking\n3️⃣ Web Development\n\n💬 For support, type /support"
+    update.message.reply_text(menu_text, parse_mode="Markdown")
+
+def support(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text("For support, contact us on WhatsApp: 8180082739 or Email: patildigitalblog@gmail.com")
+
+def main():
+    updater = Updater(TOKEN, use_context=True)
+    dp = updater.dispatcher
+    
+    dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("menu", menu))
+    dp.add_handler(CommandHandler("support", support))
+    
+    updater.start_polling()
+    updater.idle()
+
+if __name__ == "__main__":
+    main()
